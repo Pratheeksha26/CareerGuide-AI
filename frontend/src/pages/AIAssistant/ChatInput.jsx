@@ -17,6 +17,7 @@ const ChatInput = ({
   quickQuestions,
   onQuickQuestion,
   fileInputRef,
+  onFocus,
 }) => {
   return (
     <div className="cinput-root">
@@ -71,6 +72,7 @@ const ChatInput = ({
           value={input}
           onChange={onInputChange}
           onKeyPress={onKeyPress}
+          onFocus={onFocus}
           placeholder="Ask me anything about your career..."
           disabled={isLoading}
         />

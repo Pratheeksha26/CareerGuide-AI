@@ -34,9 +34,42 @@ const Chatbot = () => {
 
   const fileInputRef = useRef(null);
   const messagesEndRef = useRef(null);
+  const containerRef = useRef(null);
 
   useEffect(() => { loadChatSessions(true); }, []);
   useEffect(() => { messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' }); }, [messages]);
+
+  useEffect(() => {
+    const handleVisualViewportResize = () => {
+      if (window.visualViewport && containerRef.current && isMobile()) {
+        const vvHeight = window.visualViewport.height;
+        // 56px is header height on mobile
+        containerRef.current.style.height = `${vvHeight - 56}px`;
+        setTimeout(() => {
+          messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+        }, 100);
+      }
+    };
+
+    if (window.visualViewport) {
+      window.visualViewport.addEventListener('resize', handleVisualViewportResize);
+      window.visualViewport.addEventListener('scroll', handleVisualViewportResize);
+    }
+    return () => {
+      if (window.visualViewport) {
+        window.visualViewport.removeEventListener('resize', handleVisualViewportResize);
+        window.visualViewport.removeEventListener('scroll', handleVisualViewportResize);
+      }
+    };
+  }, []);
+
+  const handleInputFocus = () => {
+    if (isMobile()) {
+      setTimeout(() => {
+        messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+      }, 300);
+    }
+  };
 
   const loadChatSessions = async (autoLoadFirst = false) => {
     try {
@@ -229,7 +262,7 @@ const Chatbot = () => {
   };
 
   return (
-    <div className="chatbot-container">
+    <div className="chatbot-container" ref={containerRef}>
       <div className="chatbot-header">
         <div className="chatbot-header-left">
           <button
@@ -285,6 +318,7 @@ const Chatbot = () => {
             onInputChange={(e) => setInput(e.target.value)}
             onSend={sendMessage}
             onKeyPress={handleKeyPress}
+            onFocus={handleInputFocus}
             pendingFiles={pendingFiles}
             onRemoveFile={removePendingFile}
             onFileSelect={handleFileSelect}

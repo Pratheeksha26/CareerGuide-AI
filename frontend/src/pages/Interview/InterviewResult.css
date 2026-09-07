@@ -182,3 +182,103 @@
     transform: translateY(-3px);
     box-shadow: var(--shadow-md);
 }
+
+/* ==============================
+   Mobile Responsive
+   ============================== */
+@media (max-width: 900px) {
+    .res-container {
+        margin: 20px auto;
+        padding: 15px;
+    }
+
+    .res-header {
+        flex-direction: column;
+        text-align: center;
+        gap: 20px;
+        padding: 25px 20px;
+    }
+
+    .res-main-score {
+        padding-right: 0;
+        border-right: none;
+        padding-bottom: 20px;
+        border-bottom: 1px solid var(--stone);
+        width: 100%;
+    }
+
+    .res-trophy {
+        font-size: 2.5rem;
+    }
+
+    .res-big-num {
+        font-size: 3rem;
+    }
+
+    .res-summary h3 {
+        font-size: 1.4rem;
+        margin-bottom: 10px;
+    }
+
+    .res-summary p {
+        font-size: 1rem;
+    }
+
+    .res-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .res-card {
+        padding: 20px 15px;
+    }
+}
+
+@media (max-width: 600px) {
+    .res-container {
+        margin: 10px auto;
+        padding: 10px;
+    }
+
+    .res-header {
+        padding: 20px 15px;
+    }
+
+    .res-q-item {
+        padding: 15px 12px;
+    }
+
+    .res-q-header {
+        gap: 10px;
+        align-items: flex-start;
+    }
+
+    .res-q-num {
+        width: 22px;
+        height: 22px;
+        font-size: 0.75rem;
+        flex-shrink: 0;
+        margin-top: 2px;
+    }
+
+    .res-q-header h4 {
+        font-size: 0.95rem;
+    }
+
+    .res-q-score {
+        font-size: 0.9rem;
+        flex-shrink: 0;
+    }
+
+    .res-q-feedback {
+        padding-left: 0;
+        margin-top: 8px;
+        font-size: 0.875rem;
+    }
+
+    .iv-btn-practice {
+        width: 100%;
+        justify-content: center;
+        padding: 0.85rem 1.5rem;
+    }
+}
