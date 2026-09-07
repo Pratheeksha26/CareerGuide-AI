@@ -83,91 +83,11 @@
   color: var(--terracotta);
 }
 
-/* Quick questions */
-.cinput-quick-section {
-  padding: 0.5rem 2rem;
-  background: var(--white);
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  overflow: hidden;
-  max-height: 300px;
-}
-
-.cinput-quick-section.collapsed {
-  max-height: 40px;
-  padding-bottom: 0;
-}
-
-.cinput-quick-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  cursor: pointer;
-  padding: 0.5rem 0;
-  user-select: none;
-}
-
-.cinput-quick-header:hover .cinput-quick-title {
-  color: var(--primary-hover);
-}
-
-.cinput-quick-title {
-  margin: 0;
-  font-size: 0.8rem;
-  color: var(--primary);
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  transition: color 0.3s ease;
-}
-
-.cinput-toggle-icon {
-  font-size: 0.8rem;
-  color: var(--slate-400);
-  transition: transform 0.3s ease;
-}
-
-.cinput-quick-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.75rem;
-  margin-top: 1rem;
-  padding-bottom: 1.5rem;
-  transition: opacity 0.3s ease;
-}
-
-.cinput-quick-section.collapsed .cinput-quick-list {
-  opacity: 0;
-  pointer-events: none;
-}
-
-.cinput-quick-btn {
-  padding: 0.6rem 1.25rem;
-  background: var(--white);
-  border: 1px solid rgba(74, 93, 78, 0.1);
-  border-radius: var(--radius-full);
-  font-size: 0.85rem;
-  color: var(--umber);
-  cursor: pointer;
-  transition: var(--transition);
-  font-family: inherit;
-  font-weight: 500;
-}
-
-.cinput-quick-btn:hover:not(:disabled) {
-  border-color: var(--primary);
-  color: var(--primary);
-  background: var(--primary-light);
-  transform: translateY(-2px);
-}
-
-.cinput-quick-btn:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
 
 /* Main input row */
 .cinput-row {
   padding: 1.5rem 2rem;
+  padding-bottom: max(1.5rem, env(safe-area-inset-bottom));
   background: var(--white);
   border-top: 1px solid rgba(74, 93, 78, 0.1);
   display: flex;
@@ -279,22 +199,8 @@
 @media (max-width: 768px) {
   .cinput-row {
     padding: 0.875rem 1rem;
+    padding-bottom: max(0.875rem, env(safe-area-inset-bottom));
     gap: 0.75rem;
-  }
-
-  .cinput-quick-section {
-    padding: 0.4rem 1rem;
-  }
-
-  .cinput-quick-list {
-    gap: 0.5rem;
-    margin-top: 0.75rem;
-    padding-bottom: 1rem;
-  }
-
-  .cinput-quick-btn {
-    padding: 0.5rem 0.9rem;
-    font-size: 0.8rem;
   }
 
   .cinput-pending-files {
@@ -325,16 +231,8 @@
 @media (max-width: 480px) {
   .cinput-row {
     padding: 0.75rem 0.875rem;
+    padding-bottom: max(0.75rem, env(safe-area-inset-bottom));
     gap: 0.6rem;
-  }
-
-  .cinput-quick-section {
-    padding: 0.35rem 0.875rem;
-  }
-
-  .cinput-quick-btn {
-    padding: 0.45rem 0.75rem;
-    font-size: 0.78rem;
   }
 
   .cinput-textarea {

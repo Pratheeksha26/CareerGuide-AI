@@ -18,8 +18,6 @@ const ChatInput = ({
   onQuickQuestion,
   fileInputRef,
 }) => {
-  const [isQuickOpen, setIsQuickOpen] = React.useState(true);
-
   return (
     <div className="cinput-root">
       {pendingFiles.length > 0 && (
@@ -50,25 +48,6 @@ const ChatInput = ({
           </div>
         </div>
       )}
-
-      <div className={`cinput-quick-section ${!isQuickOpen ? 'collapsed' : ''}`}>
-        <div className="cinput-quick-header" onClick={() => setIsQuickOpen(!isQuickOpen)}>
-          <h4 className="cinput-quick-title">Quick Questions:</h4>
-          <span className="cinput-toggle-icon">{isQuickOpen ? '▼' : '▲'}</span>
-        </div>
-        <div className="cinput-quick-list">
-          {quickQuestions.map((q, i) => (
-            <button
-              key={i}
-              onClick={() => onQuickQuestion(q)}
-              className="cinput-quick-btn"
-              disabled={isLoading}
-            >
-              {q}
-            </button>
-          ))}
-        </div>
-      </div>
 
       <div className="cinput-row">
         <button

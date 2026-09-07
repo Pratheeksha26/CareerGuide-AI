@@ -169,7 +169,8 @@
 @media (max-width: 768px) {
   .chatbot-container {
     top: var(--header-height);
-    height: calc(100vh - var(--header-height));
+    height: calc(100dvh - var(--header-height));
+    height: calc(100vh - var(--header-height)); /* fallback */
   }
 
   .chatbot-header {
