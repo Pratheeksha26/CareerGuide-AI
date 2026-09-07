@@ -5,18 +5,8 @@ const chatController = require('../controllers/chatController');
 const { authMiddleware } = require('../middleware/authMiddleware');
 const multer = require('multer');
 
-// Configure multer for disk storage
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    const uploadPath = path.join(__dirname, '..', 'uploads', 'chat_files');
-    cb(null, uploadPath);
-  },
-  filename: function (req, file, cb) {
-    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
-    const ext = path.extname(file.originalname);
-    cb(null, file.fieldname + '-' + uniqueSuffix + ext);
-  }
-});
+// Configure multer for memory storage (serverless compatible)
+const storage = multer.memoryStorage();
 
 const upload = multer({ 
   storage,

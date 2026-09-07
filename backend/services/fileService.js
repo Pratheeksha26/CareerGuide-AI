@@ -11,14 +11,16 @@ class FileService {
         // If using disk storage, read buffer from path
         if (!buffer && path) {
             try {
-                buffer = fs.readFileSync(path);
+                if (fs.existsSync(path)) {
+                    buffer = fs.readFileSync(path);
+                }
             } catch (err) {
                 console.error(`Failed to read file from path ${path}:`, err);
             }
         }
 
         if (!buffer) {
-            return `[Error: No content found for ${originalname}]`;
+            return `[Error: No content found for ${originalname || 'file'}]`;
         }
 
         console.log(`📄 Extracting text from: ${originalname} (${mimetype})`);
@@ -30,7 +32,7 @@ class FileService {
                 return await this.extractFromDocx(buffer);
             } else if (mimetype === 'text/plain' || extension === 'txt') {
                 return buffer.toString('utf8');
-            } else if (mimetype.startsWith('image/')) {
+            } else if (mimetype && mimetype.startsWith('image/')) {
                 return await this.extractFromImage(buffer);
             } else {
                 return `[Unsupported file format: ${originalname}]`;
@@ -44,10 +46,10 @@ class FileService {
     async extractFromPDF(buffer) {
         try {
             const data = await pdfParse(buffer);
-            return data.text;
+            return (data && data.text && data.text.trim()) ? data.text : '[PDF contains no selectable text or is an image-based scanned PDF]';
         } catch (error) {
             console.error('PDF extraction error:', error);
-            throw new Error('Failed to parse PDF');
+            return '[Error: Failed to parse PDF document]';
         }
     }
 
